@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputSelect from "./components/inputSelect/InputSelect";
+import { InputSelect } from "./components/inputSelect/InputSelect";
 
 const items = [
   "Alligator mississippiensis",
@@ -64,10 +64,6 @@ const App = () => {
         placeholder="Selecciona una opción..."
         complementProps={{ prams: 12 }}
       />
-      <Accordion>
-        <h1>Primer Accordion jejejeje</h1>
-        <h1>Primer Accordion jejejeje</h1>
-      </Accordion>
     </div>
   );
 };
