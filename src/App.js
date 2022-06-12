@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Accordion from "./components/Accordion/Accordion";
-import { InputSelect } from "./components/inputSelect/InputSelect";
+import InputSelect from "./components/inputSelect/InputSelect";
 
 const items = [
   "Alligator mississippiensis",
