@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const Accordion = ({ children }) => {
-  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const openAccordion = (index) => {
     if (index === currentIndex) {
-      setCurrentIndex(-1);
+      setCurrentIndex(null);
       return;
     }
 
