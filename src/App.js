@@ -1,51 +1,8 @@
-import React, { useState } from "react";
-import InputSelect from "./components/inputSelect/InputSelect";
-
-const items = [
-  "Alligator mississippiensis",
-  "Cygnus buccinator",
-  "Panthera onca",
-  "Vombatus ursinus",
-  "Madoqua kirkii",
-  "Procyon lotor",
-  "unavailable",
-  "Falco mexicanus",
-  "Propithecus verreauxi",
-  "Microcebus murinus",
-  "Merops nubicus",
-  "Sula dactylatra",
-  "Sula dactylatra",
-  "Fregata magnificans",
-  "Laniaurius atrococcineus",
-  "Cracticus nigroagularis",
-  "Acridotheres tristis",
-  "Eudyptula minor",
-  "Gekko gecko",
-  "Acrantophis madagascariensis",
-  "Petaurus breviceps",
-  "Certotrichas paena",
-  "Otaria flavescens",
-  "Chloephaga melanoptera",
-  "Nannopterum harrisi",
-  "Oryx gazella",
-  "Corvus brachyrhynchos",
-  "Halcyon smyrnesis",
-  "Milvago chimachima",
-  "Ovis ammon",
-  "Alopochen aegyptiacus",
-  "Semnopithecus entellus",
-  "Thylogale stigmatica",
-  "Ictonyx striatus",
-  "Terrapene carolina",
-  "Macaca nemestrina",
-  "Estrilda erythronotos",
-  "Chelodina longicollis",
-  "Mephitis mephitis",
-  "Macaca mulatta",
-];
+import React from "react";
+import Accordion from "./components/Accordion";
+import ItemAccordion from "./components/Accordion/ItemAccordion/Index";
 
 const App = () => {
-  const [profesion, setProfesion] = useState("");
   return (
     <div
       style={{
@@ -56,17 +13,31 @@ const App = () => {
         textAlign: "center",
       }}
     >
-      <InputSelect
-        items={items}
-        name="profesion"
-        onChange={({ value }) => setProfesion(value)}
-        value={profesion}
-        placeholder="Selecciona una opción..."
-        complementProps={{ prams: 12 }}
-      />
       <Accordion>
-        <h1>Primer Accordion jejejeje</h1>
-        <h1>Primer Accordion jejejeje</h1>
+        <ItemAccordion>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ex
+            corporis tenetur dolorum voluptate earum ad eum velit, nesciunt eos!
+            Hic officia, cupiditate nobis aliquam odit quas sit corporis in!
+          </p>
+        </ItemAccordion>
+        <ItemAccordion>
+          <div style={{ padding: "2rem" }}>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+              ex corporis tenetur dolorum voluptate earum ad eum velit, nesciunt
+              eos! Hic officia, cupiditate nobis aliquam odit quas sit corporis
+              in!
+            </p>
+            <h1>Dodofodfodsf</h1>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Architecto itaque cum corrupti sint unde eius consequatur
+              laboriosam at similique, assumenda facilis ullam sunt distinctio,
+              voluptatum tempora culpa voluptatibus? Laborum, itaque.
+            </p>
+          </div>
+        </ItemAccordion>
       </Accordion>
     </div>
   );

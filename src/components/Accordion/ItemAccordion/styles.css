@@ -1,0 +1,62 @@
+div.item__accordion {
+  width: 100%;
+  height: auto;
+  margin: 1rem;
+  position: relative;
+  border: none;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  background-color: #999;
+  box-shadow: 0 0 1rem rgb(215, 182, 182);
+}
+
+div.item__accordion div.item__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+div.item__accordion div.item__content.active__accordion {
+  max-height: 1000px;
+}
+
+button.item__panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 14px;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  background-color: crimson;
+  color: #fff;
+}
+
+button.item__panel::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 10px;
+  height: 10px;
+  padding: 7px;
+  border-radius: 50%;
+  background-color: rgb(227, 249, 249);
+}
+
+button.item__panel i.arrow {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  padding: 5px;
+  cursor: default;
+  border: solid rgb(118, 104, 104);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: 0.5s ease;
+}
+
+button.item__panel i.arrow.active {
+  transform: rotate(225deg);
+  top: 25px;
+}
