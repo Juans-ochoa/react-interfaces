@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import DatePicker from "./components/datePicker/DatePicker";
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
         textAlign: "center",
       }}
     >
-      <h1>Content here!</h1>
+      <DatePicker />
     </div>
   );
 };

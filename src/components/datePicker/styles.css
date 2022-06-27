@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+article.calendar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 340px;
+  height: 340px;
+  margin: 1rem auto;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  border-radius: 1em;
+  box-shadow: 0 0 11px 6px rgb(177, 179, 183);
+  background-color: #eeebe7;
+}
+
+ul.calendar__days {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  list-style: none;
+}
+
+li.calendar__nameWeek {
+  font-size: 18px;
+  cursor: default;
+}
+
+div.calendar__month_days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1rem;
+  margin: 1rem;
+}
+
+div.calendar__months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem;
+}
+
+div.calendar__years {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1rem;
+}
