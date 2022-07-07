@@ -6,7 +6,6 @@ class Calendar {
     this.currentWeekDay = this.currentDate.getUTCDay();
     this.currentMonthDay = this.currentDate.getDay();
 
-    this.years = [];
     this.months = [
       { id: 0, name: "enero" },
       { id: 1, name: "febrero" },
@@ -30,18 +29,14 @@ class Calendar {
       { id: 5, name: "Vi" },
       { id: 6, name: "Sa" },
     ];
-    this.mothDays = [];
 
     this.selectYear = null;
     this.selectWeekDay = null;
     this.selectMonthDay = null;
-
-    this.generateYears();
-    this.generateMonthDays();
   }
 
   generateYears(year = null) {
-    this.years = Array.from({ length: 13 }).map(
+    return Array.from({ length: 13 }).map(
       (_, i) => (year || this.currentYear) - 6 + i
     );
   }
@@ -57,7 +52,7 @@ class Calendar {
     }
 
     const numberDays = new Date(year, month, 0).getDate();
-    this.mothDays = Array.from({ length: numberDays }).map((_, i) => ({
+    return Array.from({ length: numberDays }).map((_, i) => ({
       id: i + 1,
       number: i + 1,
       weekDay: new Date(year, month - 1, i + 1).getDay(),

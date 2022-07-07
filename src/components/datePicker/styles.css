@@ -1,17 +1,92 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
 article.calendar {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 340px;
+  width: 360px;
   height: 340px;
   margin: 1rem auto;
-  font-family: "Poppins", sans-serif;
   border: 0;
   border-radius: 1em;
-  box-shadow: 0 0 11px 6px rgb(177, 179, 183);
-  background-color: #eeebe7;
+  background-color: #303841;
+  color: #eeeeee;
+}
+
+header.calendar__header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 1rem;
+  padding: 0 0.5rem;
+}
+
+button.calendar__info_date {
+  min-width: 220px;
+  height: 34px;
+  font-size: 17px;
+  font-weight: 500;
+  border: 0;
+  border-radius: 7px;
+  outline: none;
+  background-color: #eeeeee;
+  color: #303841;
+}
+
+button.calendar__info_date:hover {
+  background-color: #ff5722;
+  color: #eeeeee;
+}
+
+button.calendar__btn_back,
+button.calendar__btn_next {
+  display: flex;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 7px;
+  outline: none;
+  background-color: transparent;
+}
+
+button.calendar__btn_back:hover,
+button.calendar__btn_next:hover {
+  background-color: #eeeeee;
+}
+
+button.calendar__btn_back::before,
+button.calendar__btn_next::before {
+  content: "";
+  position: absolute;
+  top: calc(1.7rem - 50%);
+  left: calc(1.8rem - 50%);
+  width: 14px;
+  height: 14px;
+  border: solid #ff5722;
+  border-width: 0 3px 3px 0;
+  transform: rotate(135deg);
+}
+
+button.calendar__btn_next::before {
+  transform: rotate(-45deg);
+  left: calc(1.5rem - 50%);
 }
 
 ul.calendar__days {
@@ -20,11 +95,13 @@ ul.calendar__days {
   width: 100%;
   height: auto;
   padding: 0;
+  margin: 0.4rem;
   list-style: none;
 }
 
 li.calendar__nameWeek {
   font-size: 18px;
+  font-weight: 600;
   cursor: default;
 }
 
@@ -32,8 +109,22 @@ div.calendar__month_days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 1rem;
+  gap: 0.8em;
   margin: 1rem;
+}
+
+button.calendar__day {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  outline: none;
+  border-radius: 7px;
+  font-size: 17px;
+}
+
+button.calendar__day:hover {
+  background-color: #ff5722;
+  color: #eaeaea;
 }
 
 div.calendar__months {
@@ -44,10 +135,55 @@ div.calendar__months {
   margin: 1rem;
 }
 
+button.calendar__month {
+  height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 7px;
+  outline: none;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+button.calendar__month:hover {
+  background-color: #ff5722;
+  color: #eeeeee;
+}
+
 div.calendar__years {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 1rem;
   margin: 1rem;
+}
+
+button.calendar__year {
+  height: 44px;
+  font-size: 17px;
+  font-weight: 500;
+  border: 1px solid #ff5722;
+  border-radius: 7px;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+button.calendar__year:hover {
+  background-color: #ff5722;
+}
+
+button.calendar__year:nth-of-type(7) {
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 2;
+  height: 100%;
+  align-self: center;
+  font-size: 3rem;
+  color: #00adb5;
+}
+
+button.calendar__year:nth-of-type(7):hover {
+  background-color: #eeeeee;
+  border: #303841;
 }

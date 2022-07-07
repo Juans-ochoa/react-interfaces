@@ -1,22 +1,90 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import Calendar from "./Calendar";
 
 const DatePicker = () => {
-  const [showYears, setShowYears] = useState(false);
+  const [showYears, setShowYears] = useState(true);
   const [showMonths, setShowMonths] = useState(false);
-  const [showDays, setShowDays] = useState(true);
+  const [showDays, setShowDays] = useState(false);
+  const [years, setYears] = useState([]);
+  const [months, setMonths] = useState([]);
+  const [currentDate, setCurrentDate] = useState(null);
+  const [weekDays, setWeekDays] = useState([]);
+  const [days, setDays] = useState([]);
+
+  const [selectYear, setSelectYear] = useState(null);
+  const [counterYear, setCounterYear] = useState(0);
+  const [selectWeekDay, setSelectWeekDay] = useState(null);
+  const [selectMonth, setSelectMonth] = useState(null);
+
+  const back = () => {
+    if (showYears) {
+      setCounterYear(counterYear - 6);
+      return;
+    }
+
+    if (showMonths) {
+      console.log(counterYear);
+      setCounterYear(counterYear - 1);
+      return;
+    }
+  };
+
+  const next = () => {
+    if (showYears) {
+      setCounterYear(counterYear + 6);
+      return;
+    }
+
+    if (showMonths) {
+      console.log(counterYear);
+      setCounterYear(counterYear + 1);
+      return;
+    }
+  };
+
+  const selectingYear = (year) => {
+    setSelectYear(year);
+    setCounterYear(year);
+    setShowYears(false);
+    setShowMonths(true);
+  };
+
+  const selectingMonth = (month) => {
+    setSelectMonth(month);
+    setShowMonths(false);
+    setShowDays(true);
+  };
+
+  useEffect(() => {
+    setYears(Calendar.generateYears(counterYear));
+  }, [counterYear]);
+
+  useEffect(() => {
+    setCurrentDate({
+      monthDay: Calendar.currentMonthDay,
+      dayWeek: Calendar.currentWeekDay,
+      month: Calendar.currentMonth,
+      year: Calendar.currentYear,
+      date: Calendar.currentDate,
+    });
+    setYears(Calendar.generateYears());
+    setMonths(Calendar.months);
+    setWeekDays(Calendar.weekDays);
+    setDays(Calendar.generateMonthDays());
+    setCounterYear(Calendar.currentYear);
+  }, []);
 
   return (
     <article className="calendar">
       <header className="calendar__header">
-        <button>&#60;</button>
-        <button>Months</button>
-        <button>&#62;</button>
+        <button onClick={back} className="calendar__btn_back"></button>
+        <button className="calendar__info_date">Months</button>
+        <button onClick={next} className="calendar__btn_next"></button>
       </header>
       <section className="calendar__body">
         <ul className="calendar__days">
-          {Calendar.weekDays.map((day) => (
+          {weekDays.map((day) => (
             <li key={day.id} className="calendar__nameWeek">
               {day.name}
             </li>
@@ -24,22 +92,36 @@ const DatePicker = () => {
         </ul>
         {showDays && (
           <div className="calendar__month_days">
-            {Calendar.mothDays.map(({ number }) => (
-              <button key={number}>{number}</button>
+            {days.map(({ number }) => (
+              <button className="calendar__day" key={number}>
+                {number}
+              </button>
             ))}
           </div>
         )}
         {showMonths && (
           <div className="calendar__months">
-            {Calendar.months.map(({ id, name }) => (
-              <button key={id}>{name}</button>
+            {months.map(({ id, name }) => (
+              <button
+                onClick={() => selectingMonth(id)}
+                className="calendar__month"
+                key={id}
+              >
+                {name}
+              </button>
             ))}
           </div>
         )}
         {showYears && (
           <div className="calendar__years">
-            {Calendar.years.map((year) => (
-              <button key={year}>{year}</button>
+            {years.map((year) => (
+              <button
+                onClick={() => selectingYear(year)}
+                className="calendar__year"
+                key={year}
+              >
+                {year}
+              </button>
             ))}
           </div>
         )}
