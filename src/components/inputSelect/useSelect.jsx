@@ -1,67 +1,63 @@
 import { useEffect, useState } from "react";
 
 const useSelect = (params) => {
-  const { name, value, items, arrowRef, itemsRef, onChange, complementProps } =
-    params;
+  const { name, value, options, onChange, onBlur, readOnly } = params;
 
-  const [label, setLabel] = useState("");
-  const [localValue, setLocalValue] = useState(value);
-  const [listItems, setListItems] = useState([]);
+  const [optionText, setOptionText] = useState("");
+  const [localOptions, setLocalOptions] = useState([]);
+  const [selectOption, setSelectOption] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
+  const [selectValue, setSelectValue] = useState(false);
+  const [callOnBlur, setCallOnBlur] = useState(false);
 
   const getValue = (item) => {
-    console.log(item);
-    setLocalValue(
-      typeof item === "string" || typeof item === "number" ? item : item.id
-    );
-    setLabel(
-      typeof item === "string" || typeof item === "number" ? item : item.label
-    );
-
-    itemsRef.current.style.display = "none";
-    arrowRef.current.classList.remove("active__arrow");
+    setSelectOption({ ...item });
+    setSelectValue(true);
   };
 
-  const showListSelect = (arrowActive = false) => {
-    if (!arrowActive) {
-      arrowRef.current.classList.add("active__arrow");
-      itemsRef.current.style.display = "block";
-    } else {
-      arrowRef.current.classList.toggle("active__arrow");
+  const hiddenOptions = () => {
+    setTimeout(() => {
+      setShowOptions(false);
+      setCallOnBlur(true);
+    }, 200);
+  };
 
-      if (arrowRef.current.classList.length === 1) {
-        itemsRef.current.style.display = "none";
-        return;
-      }
-      itemsRef.current.style.display = "block";
+  useEffect(() => {
+    if (selectValue) {
+      onChange({ name, value: selectOption.value });
+      setShowOptions(false);
+      setSelectValue(false);
     }
-  };
+  }, [selectValue, selectOption]);
 
   useEffect(() => {
-    if (label === "") setListItems(items);
-    setListItems(items.filter((item) => item.includes(label)));
-  }, [label]);
+    if (callOnBlur) {
+      onBlur({ name, value: selectOption ? selectOption.value : "" });
+      setCallOnBlur(false);
+    }
+  }, [callOnBlur, selectOption]);
 
   useEffect(() => {
-    onChange({ value: localValue, name, complementProps });
-  }, [localValue]);
+    if (readOnly) return;
+    const optionsFilter = options.filter(({ label }) =>
+      label.includes(optionText)
+    );
+    setLocalOptions(optionsFilter);
+  }, [optionText, readOnly]);
 
   useEffect(() => {
-    const itemsFilter = items.filter((item) => item.includes(value));
-    if (itemsFilter.length === 1)
-      setLabel(
-        typeof itemsFilter[0] === "string"
-          ? itemsFilter[0]
-          : itemsFilter[0].label
-      );
-    setListItems(itemsFilter);
+    if (value.length < 1) return setLocalOptions(options);
+    setOptionText(value[0].label);
   }, [value]);
 
   return {
-    label,
-    listItems,
-    setLabel,
+    optionText,
+    setOptionText,
     getValue,
-    showListSelect,
+    showOptions,
+    setShowOptions,
+    hiddenOptions,
+    localOptions,
   };
 };
 

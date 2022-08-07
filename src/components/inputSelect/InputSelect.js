@@ -1,51 +1,59 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./style.css";
 import useSelect from "./useSelect";
 
 export const InputSelect = ({
-  items = [],
+  options,
   name,
   placeholder,
   onChange,
   value,
   complementProps,
+  onBlur,
+  readOnly,
 }) => {
-  const itemsRef = useRef(null);
-  const arrowRef = useRef(null);
-
   const select = useSelect({
     name,
     value,
-    items,
-    arrowRef,
-    itemsRef,
+    options,
     onChange,
     complementProps,
+    onBlur,
+    readOnly,
   });
-  const { label, setLabel, getValue, showListSelect, listItems } = select;
+
+  const {
+    optionText,
+    setOptionText,
+    getValue,
+    showOptions,
+    setShowOptions,
+    hiddenOptions,
+    localOptions,
+  } = select;
 
   return (
     <div className="select__select">
       <input
         type="text"
-        name={name}
-        value={label}
-        onFocus={() => showListSelect()}
+        name="optionText"
+        value={optionText}
+        onFocus={() => setShowOptions(true)}
         placeholder={placeholder}
-        onChange={(e) => setLabel(e.target.value)}
+        onChange={(e) => setOptionText(e.target.value)}
+        onBlur={hiddenOptions}
+        readOnly={readOnly}
       />
-      <ul className="items__select" ref={itemsRef}>
-        {listItems.length > 0 ? (
+      <ul className={`items__select ${showOptions ? "active_list" : ""}`}>
+        {localOptions.length > 0 ? (
           <React.Fragment>
-            {listItems.map((item, i) => (
+            {localOptions.map((item, i) => (
               <li
                 key={i}
                 className="item__select"
                 onClick={() => getValue(item)}
               >
-                {typeof item === "string" || typeof item === "number"
-                  ? item
-                  : item.name}
+                {item.label}
               </li>
             ))}
           </React.Fragment>
@@ -53,11 +61,7 @@ export const InputSelect = ({
           <li className="item__select">No data...</li>
         )}
       </ul>
-      <i
-        className="arrow__select"
-        ref={arrowRef}
-        onClick={() => showListSelect(true)}
-      ></i>
+      <i className="arrow__select"></i>
     </div>
   );
 };
