@@ -1,0 +1,45 @@
+label {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  display: block;
+}
+
+.content__input {
+  display: flex;
+  /* pointer-events: none; */
+  background-color: transparent;
+  box-shadow: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  justify-content: center;
+}
+
+.mask__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input,
+.mask__input {
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* padding: 1rem; */
+  padding: 0.5rem;
+}
+
+.mask__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: left;
+  /* padding: calc(1rem + 3px); */
+  color: gray;
+  line-height: 1.4;
+  padding-left: 0.61rem;
+  pointer-events: none;
+  opacity: 0.5;
+}

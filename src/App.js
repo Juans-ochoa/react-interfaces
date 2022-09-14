@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import InputAutoPredictive from "./components/inputAutoPredective";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       }}
     >
       <h1>Content here!</h1>
+      <InputAutoPredictive />
     </div>
   );
 };
